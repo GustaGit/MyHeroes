@@ -15,10 +15,10 @@
             <tbody>
                 <tr *ngFor="let hero of heroesList">
                     <th scope="row">{{hero.id}}</th>
-                    <td scope="row">{{hero.name}}</td>
-                    <td scope="row">{{hero.nameHero}}</td>
+                    <td scope="row">{{hero.name | titlecase}}</td>
+                    <td scope="row">{{hero.nameHero | titlecase}}</td>
                     <td scope="row">
-                        <div *ngFor="let superpower of hero.superpower">{{superpower}}
+                        <div *ngFor="let superpower of hero.superpowers">{{superpower}}
                         </div>
                     </td>
                     <td scope="row">{{hero.birthdate | date: 'dd/MM/yyyy'}}</td>

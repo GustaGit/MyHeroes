@@ -13,7 +13,7 @@ export class HeroesService {
       id: 1,
       name: "Bruce Wayne",
       nameHero: "Batman",
-      superpower: ["Inteligencia","Artes Marciais","Super-Detetive"],
+      superpowers: ["Inteligencia","Artes Marciais","Super-Detetive"],
       weight: 85,
       height: 1.80,
       birthdate: new Date("2022-01-01T12:00:00")

@@ -8,10 +8,10 @@ namespace myHeroesAPI
         [Key]
         public int Id { get; set; }
 
-        [Column("Nome")]
+        [Column("Nome"),MaxLength(120)]
         public string Name { get; set; } = string.Empty;
 
-        [Column("NomeHeroi")]
+        [Column("NomeHeroi"),MaxLength(120)]
         public string NameHero { get; set; } = string.Empty;
 
         public List<SuperPowers>? Superpowers { get; set; }
@@ -20,9 +20,9 @@ namespace myHeroesAPI
         public DateTime? Birthdate { get; set; }
 
         [Column("Altura")]
-        public double Height { get; set; }
+        public float Height { get; set; }
 
         [Column("Peso")]
-        public double Weight { get; set; }
+        public float Weight { get; set; }
     }
 }

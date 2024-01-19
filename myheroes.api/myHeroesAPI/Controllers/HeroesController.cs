@@ -16,7 +16,12 @@ namespace myHeroesAPI.Controllers
                     Id = 1,
                     Name = "Bruce Wayne",
                     NameHero = "Batman",
-                    Superpowers = new List<string>{"Inteligencia","Artes Marciais", "Super-Detetive"},
+                    Superpowers = new List<SuperPowers>{ new SuperPowers 
+                    {
+                        SuperPower = "Inteligencia",
+                        Description = "zsdjnsdfkngkvjdsfnkjdsnfj",
+                        Id = 1
+                    } },
                     Birthdate = DateTime.Now,
                     Height = 20,
                     Weight = 66

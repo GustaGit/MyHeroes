@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
+
 import { Hero } from '../models/hero.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { enviroments } from '../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroesService {
+  private url = "Heroes" ;
 
-  constructor() { }
+  constructor(private httpClient : HttpClient) { }
 
-  public getHeroes(): Hero[] {
-    let hero: Hero = {
-      id: 1,
-      name: "Bruce Wayne",
-      nameHero: "Batman",
-      superpowers: ["Inteligencia","Artes Marciais","Super-Detetive"],
-      weight: 85,
-      height: 1.80,
-      birthdate: new Date("2022-01-01T12:00:00")
-    }
+  public getHeroes(): Observable<Hero[]> {
 
-    return [hero];
+    return this.httpClient.get<Hero[]>(`${enviroments.apiUrl}/${this.url}`);
   }
 }

@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let hero of heroesList">
+                <tr *ngFor="let hero of $heroesList | async">
                     <th scope="row">{{hero.id}}</th>
                     <td scope="row">{{hero.name | titlecase}}</td>
                     <td scope="row">{{hero.nameHero | titlecase}}</td>

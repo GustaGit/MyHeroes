@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using myHeroesAPI.Data;
 
@@ -11,9 +12,10 @@ using myHeroesAPI.Data;
 namespace myHeroesAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240119115122_SettingDbSets")]
+    partial class SettingDbSets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,8 +51,8 @@ namespace myHeroesAPI.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataNascimento");
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float")
+                    b.Property<float>("Height")
+                        .HasColumnType("real")
                         .HasColumnName("Altura");
 
                     b.Property<string>("Name")
@@ -65,8 +67,8 @@ namespace myHeroesAPI.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("NomeHeroi");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float")
+                    b.Property<float>("Weight")
+                        .HasColumnType("real")
                         .HasColumnName("Peso");
 
                     b.HasKey("Id");

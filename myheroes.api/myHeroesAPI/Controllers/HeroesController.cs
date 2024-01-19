@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using myHeroesAPI.Data;
+using myHeroesAPI.Models;
 
 namespace myHeroesAPI.Controllers
 {
@@ -6,27 +9,15 @@ namespace myHeroesAPI.Controllers
     [ApiController]
     public class HeroesController : Controller
     {
-        [HttpGet]
-        public async Task<ActionResult<List<HeroModel>>> GetHeroes()
+        private readonly DataContext _context;
+        public HeroesController(DataContext context)
         {
-            return new List<HeroModel> {
-
-                new HeroModel
-                {
-                    Id = 1,
-                    Name = "Bruce Wayne",
-                    NameHero = "Batman",
-                    Superpowers = new List<SuperPowers>{ new SuperPowers 
-                    {
-                        SuperPower = "Inteligencia",
-                        Description = "zsdjnsdfkngkvjdsfnkjdsnfj",
-                        Id = 1
-                    } },
-                    Birthdate = DateTime.Now,
-                    Height = 20,
-                    Weight = 66
-                }
-            };
+            _context = context;
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<Hero>>> GetHeroes()
+        {
+            return Ok(await _context.Hero.ToListAsync());
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using myHeroesAPI.Data;
 
@@ -11,9 +12,10 @@ using myHeroesAPI.Data;
 namespace myHeroesAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240119112609_Relations")]
+    partial class Relations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +24,7 @@ namespace myHeroesAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HeroSuperpower", b =>
+            modelBuilder.Entity("HeroModelSuperPowers", b =>
                 {
                     b.Property<int>("HeroId")
                         .HasColumnType("int");
@@ -34,10 +36,10 @@ namespace myHeroesAPI.Migrations
 
                     b.HasIndex("SuperpowersId");
 
-                    b.ToTable("HeroSuperpower");
+                    b.ToTable("HeroModelSuperPowers");
                 });
 
-            modelBuilder.Entity("myHeroesAPI.Models.Hero", b =>
+            modelBuilder.Entity("myHeroesAPI.Models.HeroModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,8 +51,8 @@ namespace myHeroesAPI.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataNascimento");
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float")
+                    b.Property<float>("Height")
+                        .HasColumnType("real")
                         .HasColumnName("Altura");
 
                     b.Property<string>("Name")
@@ -65,31 +67,16 @@ namespace myHeroesAPI.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("NomeHeroi");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float")
+                    b.Property<float>("Weight")
+                        .HasColumnType("real")
                         .HasColumnName("Peso");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Herois");
+                    b.ToTable("Hero");
                 });
 
-            modelBuilder.Entity("myHeroesAPI.Models.HeroSuperpower", b =>
-                {
-                    b.Property<int>("HeroId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SuperpowerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("HeroId", "SuperpowerId");
-
-                    b.HasIndex("SuperpowerId");
-
-                    b.ToTable("HeroisSuperpoderes");
-                });
-
-            modelBuilder.Entity("myHeroesAPI.Models.Superpower", b =>
+            modelBuilder.Entity("myHeroesAPI.Models.SuperPowers", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,41 +97,22 @@ namespace myHeroesAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Superpoderes");
+                    b.ToTable("SuperPowers");
                 });
 
-            modelBuilder.Entity("HeroSuperpower", b =>
+            modelBuilder.Entity("HeroModelSuperPowers", b =>
                 {
-                    b.HasOne("myHeroesAPI.Models.Hero", null)
+                    b.HasOne("myHeroesAPI.Models.HeroModel", null)
                         .WithMany()
                         .HasForeignKey("HeroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("myHeroesAPI.Models.Superpower", null)
+                    b.HasOne("myHeroesAPI.Models.SuperPowers", null)
                         .WithMany()
                         .HasForeignKey("SuperpowersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("myHeroesAPI.Models.HeroSuperpower", b =>
-                {
-                    b.HasOne("myHeroesAPI.Models.Hero", "Hero")
-                        .WithMany()
-                        .HasForeignKey("HeroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("myHeroesAPI.Models.Superpower", "Superpower")
-                        .WithMany()
-                        .HasForeignKey("SuperpowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Hero");
-
-                    b.Navigation("Superpower");
                 });
 #pragma warning restore 612, 618
         }

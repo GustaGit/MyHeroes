@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace myHeroesAPI
+namespace myHeroesAPI.Models
 {
-    public class SuperPowers
+    [Table("Superpoderes")]
+    public class Superpower
     {
         [Key]
         public int Id { get; set; }
@@ -13,5 +14,8 @@ namespace myHeroesAPI
 
         [Column("Descricao"), MaxLength(250)]
         public string? Description { get; set; }
+
+        public List<Hero> Hero { get; set; }
+
     }
 }

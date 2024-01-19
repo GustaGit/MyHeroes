@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using myHeroesAPI.Data;
 
@@ -11,9 +12,10 @@ using myHeroesAPI.Data;
 namespace myHeroesAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240119114009_RelationsAdjustNames")]
+    partial class RelationsAdjustNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,8 +51,8 @@ namespace myHeroesAPI.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataNascimento");
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float")
+                    b.Property<float>("Height")
+                        .HasColumnType("real")
                         .HasColumnName("Altura");
 
                     b.Property<string>("Name")
@@ -65,28 +67,13 @@ namespace myHeroesAPI.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("NomeHeroi");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float")
+                    b.Property<float>("Weight")
+                        .HasColumnType("real")
                         .HasColumnName("Peso");
 
                     b.HasKey("Id");
 
                     b.ToTable("Herois");
-                });
-
-            modelBuilder.Entity("myHeroesAPI.Models.HeroSuperpower", b =>
-                {
-                    b.Property<int>("HeroId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SuperpowerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("HeroId", "SuperpowerId");
-
-                    b.HasIndex("SuperpowerId");
-
-                    b.ToTable("HeroisSuperpoderes");
                 });
 
             modelBuilder.Entity("myHeroesAPI.Models.Superpower", b =>
@@ -126,25 +113,6 @@ namespace myHeroesAPI.Migrations
                         .HasForeignKey("SuperpowersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("myHeroesAPI.Models.HeroSuperpower", b =>
-                {
-                    b.HasOne("myHeroesAPI.Models.Hero", "Hero")
-                        .WithMany()
-                        .HasForeignKey("HeroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("myHeroesAPI.Models.Superpower", "Superpower")
-                        .WithMany()
-                        .HasForeignKey("SuperpowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Hero");
-
-                    b.Navigation("Superpower");
                 });
 #pragma warning restore 612, 618
         }

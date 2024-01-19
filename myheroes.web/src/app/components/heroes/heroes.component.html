@@ -18,7 +18,7 @@
                     <td scope="row">{{hero.name | titlecase}}</td>
                     <td scope="row">{{hero.nameHero | titlecase}}</td>
                     <td scope="row">
-                        <div *ngFor="let superpower of hero.superpowers">{{superpower}}
+                        <div *ngFor="let power of hero.superpowers">{{power.superPower| titlecase}}
                         </div>
                     </td>
                     <td scope="row">{{hero.birthdate | date: 'dd/MM/yyyy'}}</td>
